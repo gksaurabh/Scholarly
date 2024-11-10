@@ -55,12 +55,12 @@ def scrape_and_refine_arxiv_paper(url):
 
     return final_text
 
-if __name__ == "__main__":
-    arxiv_url = "https://arxiv.org/html/2411.04987v1"
-    refined_text = scrape_and_refine_arxiv_paper(arxiv_url)
+# if __name__ == "__main__":
+#     arxiv_url = "https://arxiv.org/html/2411.04987v1"
+#     refined_text = scrape_and_refine_arxiv_paper(arxiv_url)
 
-    if refined_text:
-        # Save the refined text to a file
-        with open("refined_arxiv_paper.txt", "w", encoding="utf-8") as f:
-            f.write(refined_text)
-        print("Refined text content saved to 'refined_arxiv_paper.txt'.")
+#     if refined_text:
+#         # Save the refined text to a file
+#         with open("refined_arxiv_paper.txt", "w", encoding="utf-8") as f:
+#             f.write(refined_text)
+#         print("Refined text content saved to 'refined_arxiv_paper.txt'.")

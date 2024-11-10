@@ -35,13 +35,18 @@ async function scrapeArxiv() {
     }
 
     try {
-        const response = await fetch(`${apiUrl}/scrape`, {
+        const response = await fetch('/api/scrape', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ url: arxivUrl })
         });
+
         const data = await response.json();
-        document.getElementById('extractedText').value = data.text || "Text extraction failed.";
+        if (response.ok) {
+            document.getElementById('extractedText').value = data.text;
+        } else {
+            alert(data.error || "An error occurred while scraping the arXiv URL.");
+        }
     } catch (error) {
         console.error(error);
         alert("An error occurred while scraping the arXiv URL.");
