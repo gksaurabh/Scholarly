@@ -1,5 +1,0 @@
-flask
-pdfminer.six
-PyMuPDF
-transformers
-gtts
