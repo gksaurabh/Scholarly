@@ -3,6 +3,7 @@ import os
 import fitz  # PyMuPDF
 from tempfile import NamedTemporaryFile
 import pyttsx3
+from models.local_llm_runner import query_ollama
 
 st.set_page_config(page_title="Research Paper Audiobook Reader", layout="wide")
 
@@ -55,3 +56,18 @@ if uploaded_file:
 
     if os.path.exists(audio_file_path):
         st.audio(audio_file_path, format="audio/mp3")
+
+    # TLDR Summary
+    if st.button("🧠 Generate TLDR Summary"):
+        with st.spinner("Summarizing using LLM..."):
+            tldr = query_ollama(f"Please give a concise TLDR of the following text:\n\n{page_text}")
+        st.markdown("**TLDR Summary:**")
+        st.success(tldr)
+
+    # Interactive QA
+    user_question = st.text_input("❓ Ask a question about this page")
+    if user_question:
+        with st.spinner("Thinking..."):
+            answer = query_ollama(f"Here is the text from the paper:\n{page_text}\n\nQuestion: {user_question}")
+        st.markdown("**Answer:**")
+        st.info(answer)
